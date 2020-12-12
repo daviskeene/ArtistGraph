@@ -1,4 +1,4 @@
-EXENAME = finalproj
+EXENAME = artistgraph
 OBJS = main.o graph.o ArtistGraph.o CSVReader.o
 
 CXX = clang++
@@ -38,5 +38,4 @@ test: output_msg catch/catchmain.cpp tests/tests.cpp ArtistGraph.cpp CSVReader.c
 
 clean:
 	-rm -f *.o $(EXENAME) test
-
 
