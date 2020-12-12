@@ -1,13 +1,19 @@
 # Results
 
+After trial and error, I was able to successfully implement the algorithms described in our README doc. But, what proof do we have that these algorithms worked?
+This is a list of results, which give visuals and console output for the aforementioned processes.
+
 ## Betweenness Centrality and Shortest Paths
 Betweenness Centrality is a measure of how many times a node acts as a "bridge" between two points (ie. how many shortest paths run through that node).
 To compute betweenness centrality, we first calculated a Floyd-Warshall matrix that contains the shortest distances between any two artists in our graph.
 
-We then use this matrix to determine _if_ a shortest path exists between any two nodes. If it does, then we calculate the shortest path and loop through all nodes along that path.
-We store a map that relates these verticies to a custom struct that stores an artists name and their centrality score.
+I then use this matrix to determine _if_ a shortest path exists between any two nodes. If it does, then I calculate the shortest path and loop through all nodes along that path.
+I store a map that relates these verticies to a custom struct that stores an artists name and their centrality score.
 
-The centrality score determines which artists act as a "bridge" to other artists. This lets us determine if some 
+The centrality score determines which artists act as a "bridge" to other artists. This lets us determine if some artists are more connected in the graph than others.
+
+Below is a printout of the centrality scores for each artist. The number next to the artists' name denotes the number of times this artist appears in
+a shortest path between two other artists. Feel free to `Ctrl + F` for your favorite artist to see their centrality score! 
 
 Here are the results:
 ```
@@ -747,21 +753,34 @@ due to the fact that pop has a blend of many other genres (rap, indie, rock, etc
 
 
 ### Shortest Path Between Two Artists
-We can display the shortest path between two artists. Go ahead and run `make finalproj && ./finalproj` to see an example!
+We can also display the shortest path between two artists. Go ahead and run `make finalproj && ./finalproj` to see an example!
 ```
 Future -> Meek Mill -> Big Sean -> Kanye West -> Kid Cudi
 ```
 
-### Floyd-Warshall Matrix Visualization
+The actual path computation uses Djikstra's algorithm to traverse the graph to find the path, and pushes Vertexes into a lookup table to see its previously
+visited Vertex. Once we reach the terminal node, we simply return a vector that backwards - traverses the previously visited nodes until we reach the start node.
+
+This gets us the number of artists that separate one artist from another. But remember: we also weighted our edges by the number of different genres between artists.
+What if I want to get the shortest distance between two artists?
+
+### Floyd-Warshall Matrix
+
+The Floyd-Warshall matrix is an n x n matrix, where n is the number of artists in the graph. Each row and column represents an artist in the graph. The value of the
+matrix at (i, j) is the value of the shortest distance between artist i and artist j. I can visualize our networks' distances by creating a heatmap:
+
 ![Floyd-Warshall Matrix](data/matrix.png)
 
-This is a perfectly symmetrical matrix, and for good reason: the shortest path from artist A to artist B is the same as the shortest path from artist B to artist A.
+You may notice that this is a perfectly symmetrical matrix along a line with slope -1, and this is due to the following property: the shortest path from artist A to artist B is the same as the shortest path from artist B to artist A.
+
 The colors represent the value of the shortest distance between two vertexes.
 
-The Floyd-Warshall algorithm also does something intersting: the values in the matrix is the shortest distance between any two nodes in the graph. This does not tell us the
-number of edges between any two nodes in the graph. We can find that out using a Breadth First Traversal / Search, though.
+The computation of this matrix can be found in `ArtistGraph.cpp:180`.
 
 ## Breadth First Traversal
+
+When traversing a graph of related artists, it makes the most sense to traverse using a Breadth First Algorithm. This is because I want to slowly work
+our way from one genre (or group of related artists) to another.
 
 Let's start from _Kid Cudi_, and see where our graph takes us:
 ```
@@ -1437,3 +1456,12 @@ KMD
 Madvillain
 MF DOOM
 ```
+
+## Concluding Remarks
+
+All in all, it was rewarding to see results that were somewhat _expected_. To see that popular artists had high centrality scores, that the path between
+similar artists follows a logical progression, and that the traversal groups artists together + slowly walks away from a starting genre was really cool.
+
+I would have liked to visualize the nodes in our graph using a force directed graph, or something similar. I could also potentially load more artists
+into our graph to attempt to model a large variety of Spotify artists. The problem with loading more data, especially when it comes to the Floyd-Warshall matrix, is that the computation
+becomes increasingly expensive with more and more artists.
