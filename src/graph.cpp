@@ -507,7 +507,7 @@ vector<Vertex> Graph::BFTraversal(Vertex start) {
     }
 
     iwasHere[start] = true;
-    std::string filename = std::string("BFS") + start + std::string(".txt");
+    std::string filename = std::string("../data/BFS") + start + std::string(".txt");
     std::ofstream outputFile(filename);
     while (!bfs_tra.empty()) {
         Vertex now = bfs_tra.front();
