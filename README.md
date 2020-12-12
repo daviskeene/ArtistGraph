@@ -5,11 +5,11 @@ is one of the leading data platforms for musical signal processing, and with tha
 and insights that are helpful for music and artist discovery. One of these features that Spotify offers is the idea of
 "related artists", to give people artist recommendations if they are enjoying one musician's songs.
 
-Artists on Spotify are related by their genres, and what listeners of one artist are also listening to. I aren't sure how
-related ariststs are actually calculated, but I do know that every artist has related artists. In this way, I can imagine
+Artists on Spotify are related by their genres, and what listeners of one artist are also listening to. I'm not sure how
+related ariststs are actually calculated, but I do know that every artist has related artists. In this way, we can imagine
 Spotify Related Artists as a Network Graph, with edges that connect artists of a similar genre.
 
-Using this information, I can download Spotify Artist data from Spotify and model it as a connected graph. With this in mind, I can
+Using this information, we can download Spotify Artist data from Spotify and model it as a connected graph. With this in mind, I can
 perform algorithms and analysis on the data to answer some of the following questions:
 
 1. What is the shortest path between two artists?
