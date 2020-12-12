@@ -2,7 +2,6 @@
 #include <vector>
 
 #include "../catch/catch.hpp"
-// #include "../readFromFile.hpp"
 
 #include "../ArtistGraph.h"
 #include "../CSVReader.h"

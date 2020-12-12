@@ -31,12 +31,12 @@ The edges of an ArtistGraph are weighted based on the number of different genres
 artists with many genres that differ).
 
 ## Algorithms
-Now that I have the data loaded, I can do things with it! After talking with the team (and with superior leadership from @gcevans), I were able to come up with a few different
-ideas for things I wanted to do with the data.
+Now that I have the data loaded, I can do things with it! Here are a few of the algorithms implemented in `ArtistGraph.cpp`:
 
 1. Djikstra's Algorithm for computing the shortest path between two artists.
 2. Betweenness Centrality for finding the number of shortest paths that pass between nodes (to determine musical diversity and connections).
 3. A Breadth First Search of the Graph to traverse similar artists first, and then slowly traverse the graph to artists of increasingly different genres.
+4. The Floyd-Warshall shortest distance algorithm to compute the shortest distance between any two artists in the graph.
 
 ## Running the Code
 To run the code, first change directories to the `src` folder:
@@ -45,9 +45,9 @@ To run the code, first change directories to the `src` folder:
 
 Afterwards, you can run two different `make` commands to hit two different targets:
 
-- `make test && ./test` will make and run all test cases (this is mostly for the devleopers)
+- `make test && ./test` will make and run all test cases (this is mostly for me)
 
-- `make artistgraph && ./artistgraph` will make and run a demonstration of the `ArtistGraph` and its methods. Namely, you can save a Breadth First Traversal from an artist of your choosing.
+- `make artistgraph && ./artistgraph` will make and run a demonstration of the `ArtistGraph` and its methods. Namely, you can traverse the graph from one artist to another.
 
 ## Results
 Check out the [RESULTS](https://github.com/daviskeene/ArtistGraph/blob/master/RESULTS.md) document to see the output of some of the algorithms and traversals.
